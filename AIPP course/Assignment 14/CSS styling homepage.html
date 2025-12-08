@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Task #1 Homepage</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* NAVBAR */
+    .nav {
+      background: #1f2933;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__brand { font-weight: 600; }
+    .nav__links {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+    }
+    .nav__link a {
+      color: #e5e7eb;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .nav__link a:hover { color: #ffffff; }
+
+    /* STACK NAV LINKS ON SMALL SCREENS */
+    @media (max-width: 600px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .nav__links {
+        flex-wrap: wrap;
+      }
+    }
+
+    /* CENTERED CONTENT */
+    .content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 1rem;
+    }
+    .content__inner {
+      max-width: 600px;
+      text-align: center;
+    }
+    .content__title { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .content__text { margin-bottom: 1.25rem; color: #4b5563; }
+
+    /* SIMPLE INPUT TO “TEST” PAGE */
+    .content__form input {
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      width: 100%;
+      max-width: 260px;
+      margin-right: 0.5rem;
+    }
+    .content__form button {
+      padding: 0.5rem 0.9rem;
+      border-radius: 4px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+    }
+    .content__form button:hover { background: #1d4ed8; }
+
+    /* FOOTER */
+    .footer {
+      background: #f3f4f6;
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6b7280;
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="nav__brand">Task #1</div>
+    <ul class="nav__links">
+      <li class="nav__link"><a href="#home">Home</a></li>
+      <li class="nav__link"><a href="#features">Features</a></li>
+      <li class="nav__link"><a href="#contact">Contact</a></li>
+    </ul>
+  </header>
+
+  <main class="content" id="home">
+    <div class="content__inner">
+      <h1 class="content__title">Welcome to the Homepage</h1>
+      <p class="content__text">
+        This is a simple responsive layout with a navigation bar, centered content, and a footer.
+      </p>
+      <form class="content__form" onsubmit="return false;">
+        <input type="text" placeholder="Type something to test…" />
+        <button>Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="footer">
+    &copy; 2025 Task #1. All rights reserved.
+  </footer>
+</body>
+</html>

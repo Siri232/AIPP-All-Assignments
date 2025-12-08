@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Info Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: #f4f6fb;
+            color: #111;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        form {
+            display: grid;
+            gap: 0.75rem;
+            max-width: 420px;
+            margin: 0 auto 1.5rem;
+        }
+        label {
+            display: flex;
+            flex-direction: column;
+            font-weight: 600;
+            gap: 0.25rem;
+        }
+        input {
+            padding: 0.65rem;
+            border: 1px solid #cfd8e6;
+            border-radius: 6px;
+        }
+        button {
+            background: #1846c7;
+            color: #fff;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        #studentCard {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+        #studentCard ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #studentCard li {
+            padding: 0.35rem 0;
+            border-bottom: 1px solid #eef2fb;
+        }
+        #studentCard li:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Student Info Portal</h1>
+        <p>Enter any student info below and preview their card instantly.</p>
+    </header>
+
+    <main>
+        <form id="studentForm"></form>
+        <article id="studentCard" aria-live="polite">
+            <p>Provide details above and press preview to check the card.</p>
+        </article>
+    </main>
+
+    <script>
+    const fields = [
+        { id: 'studentName', label: 'Student Name', placeholder: 'Priya Sharma' },
+        { id: 'studentId', label: 'Student ID', placeholder: 'STU1024' },
+        { id: 'course', label: 'Primary Course', placeholder: 'Data Structures' },
+        { id: 'grade', label: 'Latest Grade', placeholder: 'A-' },
+        { id: 'email', label: 'Contact Email', placeholder: 'priya@example.com', type: 'email' }
+    ];
+
+    const form = document.getElementById('studentForm');
+    const studentCard = document.getElementById('studentCard');
+
+    form.innerHTML = fields.map(({ id, label, placeholder, type = 'text' }) => `
+        <label for="${id}">
+            ${label}
+            <input id="${id}" name="${id}" type="${type}" placeholder="${placeholder}" required>
+        </label>
+    `).join('') + '<button type="submit">Preview Card</button>';
+
+    const createCardMarkup = data => `
+        <h2>${data.studentName}</h2>
+        <ul>
+            <li><strong>ID:</strong> ${data.studentId}</li>
+            <li><strong>Course:</strong> ${data.course}</li>
+            <li><strong>Grade:</strong> ${data.grade}</li>
+            <li><strong>Email:</strong> <a href="mailto:${data.email}">${data.email}</a></li>
+        </ul>
+    `;
+
+    form.addEventListener('submit', evt => {
+        evt.preventDefault();
+        const formData = Object.fromEntries(new FormData(form).entries());
+        if (Object.values(formData).some(value => !value.trim())) {
+            studentCard.innerHTML = '<p>All fields are required before previewing.</p>';
+            return;
+        }
+        studentCard.innerHTML = createCardMarkup(formData);
+    });
+    </script>
+</body>
+</html>
